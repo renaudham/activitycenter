@@ -146,7 +146,7 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - One-to-One with Session
 
 22. **Tag**
-     - Attributes: TagID, Name, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+     - Attributes: TagID, Name, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, entityType
      - Relationships:
        - Many-to-Many with Activity (through Tag)
        - Many-to-Many with Room (through Tag)
@@ -157,7 +157,7 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - Many-to-Many with MemberClass (through Tag)
 
 23. **Comment**
-     - Attributes: CommentID, UserID, Content, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+     - Attributes: CommentID, UserID, Content, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, entityType
      - Relationships:
        - One-to-Many with Activity (through Comment)
        - One-to-Many with Room (through Comment)
@@ -173,4 +173,21 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - One-to-Many with User (Members)
        - One-to-Many with Activity (Group Activities)
 
-25. **GroupMemb
+
+25. **GroupMembership**
+    - Attributes: MembershipID, UserID, GroupID, JoinDate, LeaveDate, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+    - Relationships:
+      - One-to-One with User
+      - One-to-One with MemberGroup
+
+26. **MemberClass**
+    - Attributes: ClassID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+    - Relationships:
+      - One-to-Many with User (Members)
+      - One-to-Many with Activity (Class Activities)
+
+27. **ClassMembership**
+    - Attributes: MembershipID, UserID, ClassID, JoinDate, LeaveDate, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+    - Relationships:
+      - One-to-One with User
+      - One-to-One with MemberClass
