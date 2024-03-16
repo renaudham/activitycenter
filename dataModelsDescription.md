@@ -146,26 +146,26 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - One-to-One with Session
 
 22. **Tag**
-     - Attributes: TagID, Name, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, entityType
-     - Relationships:
-       - Many-to-Many with Activity (through Tag)
-       - Many-to-Many with Room (through Tag)
-       - Many-to-Many with ExternalLocation (through Tag)
-       - Many-to-Many with Session (through Tag)
-       - Many-to-Many with User (through Tag)
-       - Many-to-Many with MemberGroup (through Tag)
-       - Many-to-Many with MemberClass (through Tag)
+     - Attributes: TagID, Name, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+   - Relationships:
+     - Many-to-Many with Activity (through ActivityTag)
+     - Many-to-Many with Room (through RoomTag)
+     - Many-to-Many with ExternalLocation (through ExternalLocationTag)
+     - Many-to-Many with Session (through SessionTag)
+     - Many-to-Many with User (through UserTag)
+     - Many-to-Many with MemberGroup (through GroupTag)
+     - Many-to-Many with MemberClass (through ClassTag)
 
 23. **Comment**
-     - Attributes: CommentID, UserID, Content, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, entityType
-     - Relationships:
-       - One-to-Many with Activity (through Comment)
-       - One-to-Many with Room (through Comment)
-       - One-to-Many with ExternalLocation (through Comment)
-       - One-to-Many with Session (through Comment)
-       - One-to-Many with User (through Comment)
-       - One-to-Many with MemberGroup (through Comment)
-       - One-to-Many with MemberClass (through Comment)
+   - Attributes: CommentID, UserID, Content, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+   - Relationships:
+     - Many-to-Many with Activity (through ActivityComment)
+     - Many-to-Many with Room (through RoomComment)
+     - Many-to-Many with ExternalLocation (through ExternalLocationComment)
+     - Many-to-Many with Session (through SessionComment)
+     - Many-to-Many with User (through UserComment)
+     - Many-to-Many with MemberGroup (through GroupComment)
+     - Many-to-Many with MemberClass (through ClassComment)
 
 24. **MemberGroup**
      - Attributes: GroupID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
@@ -191,3 +191,4 @@ Understood. Let's consolidate the comments and tags into single entities that ca
     - Relationships:
       - One-to-One with User
       - One-to-One with MemberClass
+     
