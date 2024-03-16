@@ -2,80 +2,81 @@ Understood. Let's consolidate the comments and tags into single entities that ca
 
 ### Comprehensive Data Model with All Entities
 
-1. **ActivityCenter**
-   - Attributes: CenterID, Name, Address, City, ParentGroupID, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+- **ActivityCenter**
+   - Attributes: CenterID, Name, Description, Address, City, ParentGroupID, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-Many with Room
      - One-to-Many with ExternalLocation
      - One-to-Many with Activity
      - One-to-Many with User (Admin, Animator/Teacher)
 
-2. **User**
-   - Attributes: UserID, Name, Email, Password, RoleID, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+- **User**
+   - Attributes: UserID, Name, Email, Password, Description, RoleID, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-Many with MemberProfile, FamilyProfile, AdminProfile, AnimatorTeacherProfile
      - Many-to-Many with Activity (through Booking)
      - Many-to-Many with MemberGroup (through GroupMembership)
      - Many-to-Many with MemberClass (through ClassMembership)
 
-3. **Role**
-   - Attributes: RoleID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+- **Role**
+   - Attributes: RoleID, Name, Slug, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-Many with User
 
-4. **MemberProfile**
-   - Attributes: MemberID, UserID, DateOfBirth, HealthInfo, ContactInfo, LegalInfo, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+- **MemberProfile**
+   - Attributes: MemberID, UserID, DateOfBirth, Description, preferredActivities, AgeGroup, Hocation, HealthInfo, ContactInfo, LegalInfo, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-One with User
      - One-to-Many with Booking
 
-5. **FamilyProfile**
-   - Attributes: FamilyID, UserID, ContactInfo, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+- **FamilyProfile**
+   - Attributes: FamilyID, OwnerUserID, Description, ContactInfo, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
-     - One-to-One with User
+     - One-to-One with User Owner
      - One-to-Many with FamilyMemberProfile (Children)
      - One-to-Many with Booking
 
-6. **FamilyMemberProfile**
-   - Attributes: FamilyMemberID, UserID, DateOfBirth, HealthInfo, ContactInfo, LegalInfo, RelationshipType, CanTakeCareOfMinors, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+- **FamilyMemberProfile**
+   - Attributes: FamilyMemberID, UserID, DateOfBirth, Description, HealthInfo, ContactInfo, LegalInfo, RelationshipType, CanTakeCareOfMinors, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-One with User
      - One-to-Many with Booking
 
-7. **AdminProfile**
+- **AdminProfile**
    - Attributes: AdminID, UserID, ContactInfo, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-One with User
      - One-to-Many with Activity
 
-8. **AnimatorTeacherProfile**
-   - Attributes: ProfileID, UserID, ContactInfo, Specialization, Availability, Level, CertificationID, Age, ProfileType, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+
+- **AnimatorTeacherProfile**
+   - Attributes: ProfileID, UserID, Description, ContactInfo, Specialization, Availability, Level, CertificationID, Age, ProfileType, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-One with User
      - One-to-Many with Activity
      - One-to-Many with Certification
      - One-to-Many with Schedule
 
-9. **Certification**
+- **Certification**
    - Attributes: CertificationID, AnimatorTeacherProfileID, AgeGroup, CertificationType, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - One-to-One with AnimatorTeacherProfile
 
-10. **Schedule**
+- **Schedule**
     - Attributes: ScheduleID, AnimatorTeacherProfileID, Day, StartTime, EndTime, ActivityTypeID, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
     - Relationships:
       - One-to-One with AnimatorTeacherProfile
       - One-to-One with ActivityType
 
-11. **ActivityType**
+- **ActivityType**
      - Attributes: ActivityTypeID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
      - Relationships:
        - One-to-Many with Activity
        - One-to-Many with Room
        - One-to-Many with ExternalLocation
 
-12. **Activity**
-     - Attributes: ActivityID, Name, Description, ActivityTypeID, Format, Location, Duration, Price, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote
+- **Activity**
+     - Attributes: ActivityID, Name, Description, ActivityTypeID, Format, Location, Duration, Price, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote, EquipmentNeeded, ActivityImages
      - Relationships:
        - Many-to-Many with User (through Booking)
        - One-to-Many with Room
@@ -84,12 +85,12 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - One-to-Many with Tag (through ActivityTag)
        - One-to-Many with Comment (through Comment)
 
-13. **RoomType**
+- **RoomType**
      - Attributes: RoomTypeID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
      - Relationships:
        - One-to-Many with Room
 
-14. **Room**
+- **Room**
      - Attributes: RoomID, Name, Location, Capacity, AccessibilityForDisabled, ActivityTypesAllowed, SessionsPerDay, RoomTypeID, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, Description, PublicNote, PrivateNote
      - Relationships:
        - One-to-Many with Activity
@@ -97,12 +98,12 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - One-to-Many with Tag (through Tag)
        - One-to-Many with Comment (through Comment)
 
-15. **ExternalLocationType**
+- **ExternalLocationType**
      - Attributes: ExternalLocationTypeID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
      - Relationships:
        - One-to-Many with ExternalLocation
 
-16. **ExternalLocation**
+- **ExternalLocation**
      - Attributes: LocationID, Name, Address, City, Capacity, AccessibilityForDisabled, ActivityTypesAllowed, Availability, ExternalLocationTypeID, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, Description, PublicNote, PrivateNote
      - Relationships:
        - One-to-Many with Activity
@@ -110,8 +111,8 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - One-to-Many with Tag (through Tag)
        - One-to-Many with Comment (through Comment)
 
-17. **Session**
-     - Attributes: SessionID, ActivityID, Date, Time, RoomID/ExternalLocationID, AnimatorTeacherProfileID, Status, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote
+- **Session**
+     - Attributes: SessionID, ActivityID, Date, Time, RoomID/ExternalLocationID, AnimatorTeacherProfileID, Status, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote, MaxParticipants, CurrentParticipants
      - Relationships:
        - One-to-One with Activity
        - One-to-One with Room (if applicable)
@@ -120,32 +121,32 @@ Understood. Let's consolidate the comments and tags into single entities that ca
        - One-to-Many with Tag (through Tag)
        - One-to-Many with Comment (through Comment)
 
-18. **Booking**
-     - Attributes: BookingID, UserID, ActivityID, SessionID, PaymentMethod, PaymentStatus, DateBooked, TimePeriod, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote
+- **Booking**
+     - Attributes: BookingID, UserID, ActivityID, SessionID, PaymentMethod, PaymentStatus, DateBooked, TimePeriod, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote, Status (e.g., 'confirmed', 'pending', 'cancelled')
      - Relationships:
        - One-to-One with User
        - One-to-One with Activity
        - One-to-One with Session
        - One-to-One with Payment
 
-19. **Payment**
+- **Payment**
      - Attributes: PaymentID, BookingID, Amount, Method, Status, Date, TransactionID, Currency, PaymentGatewayResponse, ErrorMessage, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
      - Relationships:
        - One-to-One with Booking
 
-20. **RecurringBooking**
+- **RecurringBooking**
      - Attributes: RecurringBookingID, UserID, ActivityID, StartDate, EndDate, RecurrencePattern, CustomPatternDetails, TimeSlot, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote
      - Relationships:
        - One-to-One with User
        - One-to-Many with RecurringSession
 
-21. **RecurringSession**
+- **RecurringSession**
      - Attributes: RecurringSessionID, RecurringBookingID, SessionID, Date, Status, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy, PublicNote, PrivateNote
      - Relationships:
        - One-to-One with RecurringBooking
        - One-to-One with Session
 
-22. **Tag**
+- **Tag**
      - Attributes: TagID, Name, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - Many-to-Many with Activity (through ActivityTag)
@@ -156,7 +157,7 @@ Understood. Let's consolidate the comments and tags into single entities that ca
      - Many-to-Many with MemberGroup (through GroupTag)
      - Many-to-Many with MemberClass (through ClassTag)
 
-23. **Comment**
+- **Comment**
    - Attributes: CommentID, UserID, Content, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
    - Relationships:
      - Many-to-Many with Activity (through ActivityComment)
@@ -167,26 +168,26 @@ Understood. Let's consolidate the comments and tags into single entities that ca
      - Many-to-Many with MemberGroup (through GroupComment)
      - Many-to-Many with MemberClass (through ClassComment)
 
-24. **MemberGroup**
+- **MemberGroup**
      - Attributes: GroupID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
      - Relationships:
        - One-to-Many with User (Members)
        - One-to-Many with Activity (Group Activities)
 
 
-25. **GroupMembership**
+- **GroupMembership**
     - Attributes: MembershipID, UserID, GroupID, JoinDate, LeaveDate, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
     - Relationships:
       - One-to-One with User
       - One-to-One with MemberGroup
 
-26. **MemberClass**
+- **MemberClass**
     - Attributes: ClassID, Name, Description, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
     - Relationships:
       - One-to-Many with User (Members)
       - One-to-Many with Activity (Class Activities)
 
-27. **ClassMembership**
+- **ClassMembership**
     - Attributes: MembershipID, UserID, ClassID, JoinDate, LeaveDate, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
     - Relationships:
       - One-to-One with User
