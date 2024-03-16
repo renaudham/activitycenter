@@ -192,4 +192,13 @@ Understood. Let's consolidate the comments and tags into single entities that ca
     - Relationships:
       - One-to-One with User
       - One-to-One with MemberClass
-     
+
+- **Feedback**
+    - Attributes: FeedbackID, UserID, SessionID, Rating, Comments, CreatedAt, UpdatedAt, DeletedAt, CreatedBy, UpdatedBy
+    - Relationships:
+      - One-to-Many with User
+      - One-to-Many with Session
+    - Notes:
+      - The Rating attribute is crucial for understanding user satisfaction and should be carefully considered in the overall feedback management strategy.
+      - The Comments attribute allows for more detailed feedback, which can be invaluable for continuous improvement.
+
